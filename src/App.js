@@ -1,11 +1,13 @@
 import "./App.css";
+//페이지 가져오기
 import Start from "./page/Start";
+import Login from "./page/Login";
 import styled from "styled-components";
 
 function App() {
   return (
     <Container>
-      <Start />
+      <Login />
     </Container>
   );
 }
