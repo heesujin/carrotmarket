@@ -2,11 +2,13 @@ import "./App.css";
 //페이지 가져오기
 import styled from "styled-components";
 import Router from "./Router";
+import Detail from "./pages/Detail";
 
 function App() {
   return (
     <Container>
-      <Router />
+      {/* <Router /> */}
+      <Detail />
     </Container>
   );
 }

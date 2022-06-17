@@ -23,7 +23,28 @@ function Detail() {
             <img src="" alt="" />
           </div>
         </div>
+        <Used>
+          <Imgs>
+            <Img
+              src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MzBfMjUy/MDAxNTM4MzE2ODc1NTE3.qPUd81FrNy3GIBQJFbiQYivQQXsArTzmfObEnzA0Aakg.2Vl2zxvvHJHw-zcimdq9V7Mh-a9-4_ajpoKuz5o7rO4g.JPEG.siwon1115/0930_05.jpg?type=w800"
+              alt=""
+            />
+            <Price>₩ 100,000</Price>
+          </Imgs>
+          <UsedComments>
+            <ItemName>
+              <Title>title</Title>
+            </ItemName>
+            <ItemExplan>
+              <Explanation>판매내용을 적어주세요</Explanation>
+            </ItemExplan>
+            <Heart>
+              ❤<span style={{ fontSize: "22px" }}>0</span>
+            </Heart>
+          </UsedComments>
+        </Used>
       </Contents>
+
       <Plus>
         <Add>+</Add>
       </Plus>
@@ -105,6 +126,85 @@ const Add = styled.p`
   color: white;
   font-size: 50px;
   margin-top: -2px;
+`;
+
+const Used = styled.div`
+  display: flex;
+`;
+
+const Imgs = styled.div`
+  width: 500px;
+  height: 500px;
+  margin-left: 50px;
+  margin-top: 10px;
+  border: 2px white solid;
+  border-radius: 10px;
+  display: block;
+`;
+
+const Img = styled.img`
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+`;
+
+const UsedComments = styled.div`
+  display: block;
+
+  width: 700px;
+  height: 500px;
+  margin: auto;
+`;
+
+const ItemName = styled.div`
+  margin: 20px;
+  display: block;
+  text-align: center;
+  margin-top: 60px;
+`;
+
+const Title = styled.h1`
+  color: white;
+  text-align: center;
+`;
+
+const ItemExplan = styled.div`
+  margin: auto;
+  width: 600px;
+  height: 280px;
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+`;
+
+const Explanation = styled.p`
+  margin-left: 20px;
+  color: white;
+`;
+
+const Heart = styled.p`
+  color: white;
+  margin-left: 570px;
+  margin-top: 50px;
+  font-size: 30px;
+`;
+
+const Price = styled.h1`
+  color: white;
+  text-align: center;
 `;
 
 export default Detail;
