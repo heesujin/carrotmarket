@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 
 function Start() {
+  const navigate = useNavigate();
+
   return (
     <All>
       <div>
@@ -12,10 +15,23 @@ function Start() {
         <Pone>우리동네 중고거래를 편리하게! </Pone>
         <Ptwo>가입하고 중고서비스를 이용하세요!</Ptwo>
       </Comments>
-      <SignUpBtn>회원가입</SignUpBtn>
+      <SignUpBtn
+        onClick={() => {
+          navigate("/signup");
+        }}
+      >
+        회원가입
+      </SignUpBtn>
 
       <Login>
-        이미 계정이 있나요? <LoginBtn>로그인</LoginBtn>
+        이미 계정이 있나요?{" "}
+        <LoginBtn
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인
+        </LoginBtn>
       </Login>
     </All>
   );
@@ -56,6 +72,10 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
+  &:hover {
+    background-color: #c64d07;
+    cursor: pointer;
+  }
 `;
 
 const Login = styled.p`
@@ -65,6 +85,10 @@ const Login = styled.p`
 
 const LoginBtn = styled.span`
   color: #ee8548;
+  &:hover {
+    color: #c64d07;
+    cursor: pointer;
+  }
 `;
 
 export default Start;

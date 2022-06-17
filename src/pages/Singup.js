@@ -1,7 +1,13 @@
+import { useRef } from "react";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 
 function SingUp() {
+  const id_ref = useRef(null);
+  const pw_ref = useRef(null);
+  const pwCheck_ref = useRef(null);
+  const nickname_ref = useRef(null);
+
   return (
     <All>
       <div>
@@ -9,16 +15,16 @@ function SingUp() {
       </div>
       <Comments>
         <Title>EMAIL</Title>
-        <IdPut type="text" />
+        <IdPut type="text" ref={id_ref} />
         <Pone>email 형식으로 작성해주세요</Pone>
         <Title>NICKNAME</Title>
-        <IdPut type="text" />
+        <IdPut type="text" ref={pw_ref} />
         <Pone>2자 이상 작성해주세요</Pone>
         <Title>PASSWORD</Title>
-        <IdPut type="text" />
+        <IdPut type="text" ref={pwCheck_ref} />
         <Pone>숫자, 영어, 특수문자를 모두 포함해 6자 이상 작성해주세요</Pone>
         <Title>PWCHECK</Title>
-        <IdPut type="text" />
+        <IdPut type="text" ref={nickname_ref} />
         <Pone>비밀번호가 일치하지 않습니다</Pone>
       </Comments>
       <SignUpBtn>회원가입</SignUpBtn>
