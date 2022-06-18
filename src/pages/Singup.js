@@ -3,60 +3,111 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { useState } from "react";
 
 function SingUp() {
   const navigate = useNavigate();
 
-  const id_ref = React.useRef(null);
-  const pw_ref = React.useRef(null);
-  const pwCheck_ref = React.useRef(null);
-  const email_ref = React.useRef(null);
+  //이름, 이메일, 비밀번호, 비밀번호 확인
+  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const callSignup = async () => {
+  //오류메시지 상태저장
+  const [nameMessage, setNameMessage] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState("");
+
+  // 유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+
+  const onSubmit = useCallback(async (e) => {
     let data = {
-      userId: id_ref.current.value,
-      password: pw_ref.current.value,
-      confirmPassword: pwCheck_ref.current.value,
-      email: email_ref.current.value,
+      userId: id.current.value,
+      password,
+      email,
+      confirmPassword: passwordConfirm,
     };
+    e.preventDefault();
+    try {
+      await axios
+        .post("http://13.124.188.218/user/signup", data)
+        .then((res) => {
+          console.log("response:", res);
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
-    const emailRegex = /^[0-9a-zA-Z]+@+[0-9a-zA-Z]+.+[a-zA-Z]$/;
-    const elseRegex = /^[ㄱ-ㅎ가-힣0-9a-zA-Z@$!%#?&]{3,10}$/;
+  // 이름
+  const onChangeId = useCallback((e) => {
+    setId(e.target.value);
+    if (e.target.value.length < 2 || e.target.value.length > 5) {
+      setNameMessage("2글자 이상 5글자 미만으로 입력해주세요.");
+      setIsName(false);
+    } else {
+      setNameMessage("올바른 이름 형식입니다 :)");
+      setIsName(true);
+    }
+  }, []);
 
-    const emailValueCheck = emailRegex.test(data.userId);
-    const passwordValueCheck = elseRegex.test(data.password);
-    const IdValueCheck = elseRegex.test(data.userId);
+  // 이메일
+  const onChangeEmail = useCallback((e) => {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailCurrent = e.target.value;
+    setEmail(emailCurrent);
 
-    await axios
-      .post("http://13.124.188.218/users/signup", data)
-      .then((response) => {
-        console.log(response.response);
-      })
+    if (!emailRegex.test(emailCurrent)) {
+      setEmailMessage("이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ");
+      setIsEmail(false);
+    } else {
+      setEmailMessage("올바른 이메일 형식이에요 : )");
+      setIsEmail(true);
+    }
+  }, []);
 
-      /* if (response.status !== "400") {
-          console.log(response, "회원가입");
-          window.alert(response.data.errorMsg);
-          //window.location.replace("/login");
-        } else {
-          window.alert(response.data.errorMsg);
-        }
-      }) */
+  // 비밀번호
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
 
-      .catch((error) => {
-        console.log(error, "에러");
-        which (data.userId.length < 3 && !IdValueCheck) {
-          window.alert("아이디를 제대로 작성했는지 확인해 주세요.");
-        } case (emailValueCheck) {
-          window.alert("이메일을 제대로 작성했는지 확인해 주세요.");
-        } case (!passwordValueCheck) {
-          window.alert("비밀번호를 제대로 작성했는지 확인해 주세요.");
-        } case (data.password !== data.confirmPassword) {
-          window.alert("비밀번호를 확인해 주세요.");
-        } case {
-          window.alert("남은 정보도 꼭! 다 채워주세요~");
-        }
-      });
-  };
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPasswordMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      );
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("안전한 비밀번호에요 : )");
+      setIsPassword(true);
+    }
+  }, []);
+
+  // 비밀번호 확인
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordConfirmCurrent = e.target.value;
+      setPasswordConfirm(passwordConfirmCurrent);
+
+      if (password === passwordConfirmCurrent) {
+        setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요 : )");
+        setIsPasswordConfirm(true);
+      } else {
+        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요 ㅜ ㅜ");
+        setIsPasswordConfirm(false);
+      }
+    },
+    [password]
+  );
 
   return (
     <All>
@@ -64,42 +115,81 @@ function SingUp() {
         <img src={carrot} alt="" />
       </div>
       <Comments>
-        <Title>USER ID</Title>
-        <IdPut
-          autoComplete="username"
-          name="username"
-          placeholder="아이디"
-          ref={id_ref}
-        />
-        <Pone>ID를 작성해 주세요(3자 이상)</Pone>
-        <Title>USER EMAIL</Title>
-        <IdPut
-          autoComplete="email"
-          name="email"
-          placeholder="이메일"
-          ref={email_ref}
-        />
-        <Pone>확인용 본인 이메일을 작성해주세요</Pone>
-        <Title>PASSWORD</Title>
-        <IdPut
-          autoComplete="current-password"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
-          ref={pw_ref}
-        />
-        <Pone>숫자, 영어, 특수문자를 모두 포함해 6자 이상 작성해주세요</Pone>
-        <Title>PASSWORD CHECK</Title>
-        <IdPut
-          autoComplete="new-password"
-          name="passwordConfirm"
-          placeholder="비밀번호 확인"
-          type="password"
-          ref={pwCheck_ref}
-        />
-        <Pone>비밀번호가 일치하지 않습니다</Pone>
+        <form onSubmit={onSubmit}>
+          <Title>USER ID</Title>
+          <IdPut text="ID" type="text" typeName="id" onChange={onChangeId} />
+          <Pone>
+            {id.length > 0 && (
+              <span className={`message ${isName ? "success" : "error"}`}>
+                {nameMessage}
+              </span>
+            )}
+          </Pone>
+          <Title>USER EMAIL</Title>
+          <IdPut
+            text="이메일"
+            type="email"
+            typeName="email"
+            onChange={onChangeEmail}
+          />
+          <Pone>
+            {email.length > 0 && (
+              <span className={`message ${isEmail ? "success" : "error"}`}>
+                {emailMessage}
+              </span>
+            )}
+          </Pone>
+          <Title>PASSWORD</Title>
+          <IdPut
+            onChange={onChangePassword}
+            passwordText="비밀번호 (숫자+영문자+특수문자 조합으로 8자리 이상)"
+            title="비밀번호"
+            typeTitle="password"
+            type="password"
+          />
+          <Pone>
+            {password.length > 0 && (
+              <span className={`message ${isPassword ? "success" : "error"}`}>
+                {passwordMessage}
+              </span>
+            )}
+          </Pone>
+          <Title>PASSWORD CHECK</Title>
+          <IdPut
+            onChange={onChangePasswordConfirm}
+            passwordText=" "
+            title="비밀번호 확인"
+            typeTitle="passwordConfirm"
+            type="password"
+          />
+          <Pone>
+            {passwordConfirm.length > 0 && (
+              <span
+                className={`message ${isPasswordConfirm ? "success" : "error"}`}
+              >
+                {passwordConfirmMessage}
+              </span>
+            )}
+          </Pone>
+        </form>
       </Comments>
-      <SignUpBtn onClick={callSignup}>회원가입</SignUpBtn>
+      <SignUpBtn
+        type="submit"
+        disabled={
+          !(
+            isName &&
+            isEmail &&
+            isPassword &&
+            isPasswordConfirm &&
+            id &&
+            email &&
+            password &&
+            passwordConfirm
+          )
+        }
+      >
+        회원가입
+      </SignUpBtn>
 
       <Log>
         다시 생각해보니 계정이 있나요?
@@ -151,7 +241,7 @@ const Pone = styled.p`
 
 const SignUpBtn = styled.button`
   color: white;
-  background-color: #ee8548;
+  background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ee8548")};
   border: none;
   padding: 18px;
   width: 500px;
