@@ -6,6 +6,7 @@ import Detail from "./pages/Detail";
 import Write from "./pages/Write";
 import Main from "./pages/Main";
 import Start from "./pages/Start";
+import Modify from "./pages/Modify";
 
 function Router() {
   return (
@@ -15,10 +16,11 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/post/:id" element={<Detail />} />
-        <Route path="/write/:id" element={<Write />} />
+        <Route path="/modify/:id" element={<Modify />} />
         <Route path="/write" element={<Write />} />
         <Route path="/main" element={<Main />} />
-        <Route path="*" element={<NotFound />} />
+        {/*         <Route path="*" element={<NotFound />} />
+         */}{" "}
       </Routes>
     </BrowserRouter>
   );

@@ -1,12 +1,62 @@
-import { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SingUp() {
-  const id_ref = useRef(null);
-  const pw_ref = useRef(null);
-  const pwCheck_ref = useRef(null);
-  const nickname_ref = useRef(null);
+  const navigate = useNavigate();
+
+  const id_ref = React.useRef(null);
+  const pw_ref = React.useRef(null);
+  const pwCheck_ref = React.useRef(null);
+  const email_ref = React.useRef(null);
+
+  const callSignup = async () => {
+    let data = {
+      userId: id_ref.current.value,
+      password: pw_ref.current.value,
+      confirmPassword: pwCheck_ref.current.value,
+      email: email_ref.current.value,
+    };
+
+    const emailRegex = /^[0-9a-zA-Z]+@+[0-9a-zA-Z]+.+[a-zA-Z]$/;
+    const elseRegex = /^[ㄱ-ㅎ가-힣0-9a-zA-Z@$!%#?&]{3,10}$/;
+
+    const emailValueCheck = emailRegex.test(data.userId);
+    const passwordValueCheck = elseRegex.test(data.password);
+    const IdValueCheck = elseRegex.test(data.userId);
+
+    await axios
+      .post("http://13.124.188.218/users/signup", data)
+      .then((response) => {
+        console.log(response.response);
+      })
+
+      /* if (response.status !== "400") {
+          console.log(response, "회원가입");
+          window.alert(response.data.errorMsg);
+          //window.location.replace("/login");
+        } else {
+          window.alert(response.data.errorMsg);
+        }
+      }) */
+
+      .catch((error) => {
+        console.log(error, "에러");
+        which (data.userId.length < 3 && !IdValueCheck) {
+          window.alert("아이디를 제대로 작성했는지 확인해 주세요.");
+        } case (emailValueCheck) {
+          window.alert("이메일을 제대로 작성했는지 확인해 주세요.");
+        } case (!passwordValueCheck) {
+          window.alert("비밀번호를 제대로 작성했는지 확인해 주세요.");
+        } case (data.password !== data.confirmPassword) {
+          window.alert("비밀번호를 확인해 주세요.");
+        } case {
+          window.alert("남은 정보도 꼭! 다 채워주세요~");
+        }
+      });
+  };
 
   return (
     <All>
@@ -14,23 +64,52 @@ function SingUp() {
         <img src={carrot} alt="" />
       </div>
       <Comments>
-        <Title>EMAIL</Title>
-        <IdPut type="text" ref={id_ref} />
-        <Pone>email 형식으로 작성해주세요</Pone>
-        <Title>NICKNAME</Title>
-        <IdPut type="text" ref={pw_ref} />
-        <Pone>2자 이상 작성해주세요</Pone>
+        <Title>USER ID</Title>
+        <IdPut
+          autoComplete="username"
+          name="username"
+          placeholder="아이디"
+          ref={id_ref}
+        />
+        <Pone>ID를 작성해 주세요(3자 이상)</Pone>
+        <Title>USER EMAIL</Title>
+        <IdPut
+          autoComplete="email"
+          name="email"
+          placeholder="이메일"
+          ref={email_ref}
+        />
+        <Pone>확인용 본인 이메일을 작성해주세요</Pone>
         <Title>PASSWORD</Title>
-        <IdPut type="text" ref={pwCheck_ref} />
+        <IdPut
+          autoComplete="current-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+          ref={pw_ref}
+        />
         <Pone>숫자, 영어, 특수문자를 모두 포함해 6자 이상 작성해주세요</Pone>
-        <Title>PWCHECK</Title>
-        <IdPut type="text" ref={nickname_ref} />
+        <Title>PASSWORD CHECK</Title>
+        <IdPut
+          autoComplete="new-password"
+          name="passwordConfirm"
+          placeholder="비밀번호 확인"
+          type="password"
+          ref={pwCheck_ref}
+        />
         <Pone>비밀번호가 일치하지 않습니다</Pone>
       </Comments>
-      <SignUpBtn>회원가입</SignUpBtn>
+      <SignUpBtn onClick={callSignup}>회원가입</SignUpBtn>
 
       <Log>
-        다시 생각해보니 계정이 있나요? <LoginBtn>로그인</LoginBtn>
+        다시 생각해보니 계정이 있나요?
+        <LoginBtn
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인
+        </LoginBtn>
       </Log>
     </All>
   );
@@ -60,6 +139,7 @@ const IdPut = styled.input`
   width: 400px;
   height: 30px;
   margin-left: -115px;
+  color: white;
 `;
 
 const Pone = styled.p`
