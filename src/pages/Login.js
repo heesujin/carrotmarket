@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import "../App.css";
 
 function Login() {
   return (
@@ -15,11 +16,11 @@ function Login() {
         <IdPut type="text" />
         {/* <Pone></Pone> */}
       </Comments>
-      <SignUpBtn>회원가입</SignUpBtn>
+      <SignUpBtn>로그인</SignUpBtn>
 
-      <Log>
+      {/* <Log>
         전에 만든 계정이 생각나셨나요? <LoginBtn>로그인</LoginBtn>
-      </Log>
+      </Log> */}
     </All>
   );
 }
@@ -67,16 +68,7 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
-`;
-
-const Log = styled.p`
-  margin-top: 30px;
-  color: white;
-  margin-left: -45px;
-`;
-
-const LoginBtn = styled.span`
-  color: #ee8548;
+  font-family: "Jalnan";
 `;
 
 export default Login;

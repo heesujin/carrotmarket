@@ -249,7 +249,7 @@ const Plus = styled.div`
 const Add = styled.p`
   color: white;
   font-size: 50px;
-  margin-top: -2px;
+  margin-top: 14px;
 `;
 
 export default Main;

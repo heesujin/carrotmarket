@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import "../App.css";
 
 function Detail() {
   return (
@@ -109,6 +110,8 @@ const Btn = styled.button`
   margin-left: 10px;
   padding: 0px 10px;
   border-radius: 5px;
+  color: white;
+  font-family: "Jalnan";
 `;
 
 const Plus = styled.div`
@@ -125,7 +128,7 @@ const Plus = styled.div`
 const Add = styled.p`
   color: white;
   font-size: 50px;
-  margin-top: -2px;
+  margin-top: 15px;
 `;
 
 const Used = styled.div`

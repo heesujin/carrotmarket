@@ -136,12 +136,13 @@ const Title = styled.h1`
 
 const AddImg = styled.div`
   /* background-color: yellow; */
-  width: 900px;
+  width: 800px;
   height: 270px;
-  display: flex;
-  overflow-x: scroll;
+  display: block;
+  overflow: auto;
   margin: auto;
   margin-top: 30px;
+
   justify-content: center;
   border: 1px solid #ee8548;
   border-radius: 10px;
@@ -177,6 +178,7 @@ const SelectImg = styled.div`
   border-radius: 10px;
   margin-top: 8px;
   float: left;
+  margin-left: 23px;
   /* background-color: white; */
 `;
 

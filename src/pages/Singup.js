@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import "../App.css";
 
 function SingUp() {
   const id_ref = useRef(null);
@@ -79,6 +80,7 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
+  font-family: "Jalnan";
 `;
 
 const Log = styled.p`

@@ -21,6 +21,7 @@ const Container = styled.div`
   height: 100%;
   background-color: #212121;
   background-size: cover;
+  font-family: "Jalnan";
 `;
 
 export default App;
