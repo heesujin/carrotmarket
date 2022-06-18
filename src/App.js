@@ -13,15 +13,18 @@ function App() {
 
 const Container = styled.div`
   position: absolute;
+  max-width: 500rem;
+  max-height: 500rem;
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0;
+  /* min-height: 500rem; */
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: #212121;
-  background-size: cover;
+  /* background-size: 200% 200%; */
   font-family: "Jalnan";
+  background-size: contain;
 `;
 
 export default App;

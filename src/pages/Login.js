@@ -31,6 +31,7 @@ const All = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   margin-left: 60px;
+  background-color: transparent;
 `;
 
 const Comments = styled.div`
