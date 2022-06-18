@@ -74,7 +74,7 @@ const Line = styled.hr`
 const Contents = styled.div`
   border: 1px solid white;
   position: absolute;
-  top: 50%;
+  margin-top: 550px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1200px;

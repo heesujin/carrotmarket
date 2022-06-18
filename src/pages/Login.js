@@ -18,7 +18,7 @@ function Login() {
       <SignUpBtn>회원가입</SignUpBtn>
 
       <Log>
-        다시 생각해보니 계정이 있나요? <LoginBtn>로그인</LoginBtn>
+        전에 만든 계정이 생각나셨나요? <LoginBtn>로그인</LoginBtn>
       </Log>
     </All>
   );
