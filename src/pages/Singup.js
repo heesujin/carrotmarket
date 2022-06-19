@@ -29,11 +29,12 @@ function SingUp() {
 
   const onSubmit = useCallback(async (e) => {
     let data = {
-      userId: id.current.value,
+      userId: id,
       password,
       email,
       confirmPassword: passwordConfirm,
     };
+    //console.log(data);
     e.preventDefault();
     try {
       await axios
@@ -49,11 +50,11 @@ function SingUp() {
   // 이름
   const onChangeId = useCallback((e) => {
     setId(e.target.value);
-    if (e.target.value.length < 2 || e.target.value.length > 5) {
-      setNameMessage("2글자 이상 5글자 미만으로 입력해주세요.");
+    if (e.target.value.length < 2 || e.target.value.length < 10) {
+      setNameMessage("3글자 이상 입력해주세요.");
       setIsName(false);
     } else {
-      setNameMessage("올바른 이름 형식입니다 :)");
+      setNameMessage("알맞게 작성되었습니다 :)");
       setIsName(true);
     }
   }, []);
@@ -66,28 +67,25 @@ function SingUp() {
     setEmail(emailCurrent);
 
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage("이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ");
+      setEmailMessage("이메일 형식을 다시 한번 확인해 주세요.");
       setIsEmail(false);
     } else {
-      setEmailMessage("올바른 이메일 형식이에요 : )");
+      setEmailMessage("알맞게 작성되었습니다 :)");
       setIsEmail(true);
     }
   }, []);
 
   // 비밀번호
   const onChangePassword = useCallback((e) => {
-    const passwordRegex =
-      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordRegex = /^[ㄱ-ㅎ가-힣0-9a-zA-Z@$!%#?&]{3,10}$/;
     const passwordCurrent = e.target.value;
     setPassword(passwordCurrent);
 
     if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage(
-        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-      );
+      setPasswordMessage("3자 이상 10자 미만으로 작성해 주세요.");
       setIsPassword(false);
     } else {
-      setPasswordMessage("안전한 비밀번호에요 : )");
+      setPasswordMessage("알맞게 작성되었습니다 :)");
       setIsPassword(true);
     }
   }, []);
@@ -102,7 +100,7 @@ function SingUp() {
         setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요 : )");
         setIsPasswordConfirm(true);
       } else {
-        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요 ㅜ ㅜ");
+        setPasswordConfirmMessage("비밀번호를 다시한번 확인해 주세요.");
         setIsPasswordConfirm(false);
       }
     },
@@ -187,6 +185,7 @@ function SingUp() {
             passwordConfirm
           )
         }
+        onClick={onSubmit}
       >
         회원가입
       </SignUpBtn>
@@ -240,7 +239,7 @@ const Pone = styled.p`
 `;
 
 const SignUpBtn = styled.button`
-  color: white;
+  color: ${(props) => (props.disabled ? "black" : "white")};
   background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ee8548")};
   border: none;
   padding: 18px;
@@ -249,6 +248,10 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
+  &:hover {
+    background-color: #c64d07;
+    cursor: pointer;
+  }
 `;
 
 const Log = styled.p`
@@ -259,6 +262,10 @@ const Log = styled.p`
 
 const LoginBtn = styled.span`
   color: #ee8548;
+  &:hover {
+    color: #c64d07;
+    cursor: pointer;
+  }
 `;
 
 export default SingUp;
