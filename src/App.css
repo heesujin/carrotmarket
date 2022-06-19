@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Jalnan";
+  font-weight: 50;
+  src: url("../src/font/Jalnan.ttf") format("truetype");
+}

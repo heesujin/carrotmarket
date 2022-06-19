@@ -146,7 +146,7 @@ const AllCards = styled.div`
   /* display: flex;
   flex-wrap: wrap; */
   position: absolute;
-  top: 56%;
+  margin-top: 550px;
   left: 50%;
   transform: translate(-50%, -50%);
   /* margin-left: 30px; */
@@ -249,7 +249,7 @@ const Plus = styled.div`
 const Add = styled.p`
   color: white;
   font-size: 50px;
-  margin-top: -2px;
+  margin-top: 14px;
 `;
 
 export default Main;

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
@@ -248,12 +249,12 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
+  font-family: Jalnan;
   &:hover {
-    background-color: #c64d07;
+    background-color: ${(props) => (props.disabled ? "#f8cbac" : "#c64d07;")}
     cursor: pointer;
   }
 `;
-
 const Log = styled.p`
   margin-top: 30px;
   color: white;
