@@ -2,13 +2,52 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import Header from "./Header";
 import PlusAdd from "./PlusAdd";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function Main() {
+  const [postList, setPostList] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios.get("http://localhost:5001/post").then((res) => {
+      console.log(res.data, "데이터 불러오기");
+      setPostList(res.data);
+    });
+  }, []);
   return (
     <div>
       <Header />
       <AllCards>
         <Cards>
+          {postList.map((post, index) => {
+            return (
+              <Card
+                key={index}
+                onClick={() => {
+                  navigate(`/post/${post.id}`);
+                }}
+              >
+                <CardImg>
+                  <Img
+                    src={post.imageURL[0]}
+                    alt={`${post.imageURL[0]}-${0}`}
+                  />
+                </CardImg>
+                <Content>
+                  <Th>
+                    <Title>{post.title}</Title>
+                    <Heart>
+                      ❤<span style={{ fontSize: "22px" }}>0</span>
+                    </Heart>
+                  </Th>
+
+                  <Price>₩ 100,000</Price>
+                  {/* 🤍 */}
+                </Content>
+              </Card>
+            );
+          })}
           <Card>
             <CardImg>
               <Img

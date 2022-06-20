@@ -2,8 +2,13 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
+import axios from "axios";
 
 function Write() {
+  const contentRef = React.useRef(null);
+  const titleRef = React.useRef(null);
+  const imgRef = React.useRef(null);
+
   const [showImages, setShowImages] = React.useState([]);
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
@@ -22,8 +27,10 @@ function Write() {
 
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
-    const imageLists = event.target.files;
+    const imageLists = event;
+    console.log(imageLists);
     let imageUrlLists = [...showImages];
+    console.log(imageUrlLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
@@ -40,6 +47,23 @@ function Write() {
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
+  };
+
+  const addPost = () => {
+    let data = {
+      userId: localStorage.getItem("id"),
+      content: contentRef.current.value,
+      title: titleRef.current.value,
+      imageURL: imgRef,
+    };
+    console.log(data);
+    /* axios
+      .post("http://localhost:5001/write", data)
+      .then((response) => {
+        console.log(response, "포스트 추가");
+        window.location.replace("/main");
+      })
+      .catch((error) => console.log(error, "포스트 추가 에러")); */
   };
 
   return (
@@ -64,6 +88,7 @@ function Write() {
         <AddBtn>
           <label
             htmlFor="input-file"
+            ref={imgRef}
             //   className={classes.addButton}
             onChange={handleAddImages}
           >
@@ -72,6 +97,7 @@ function Write() {
               id="input-file"
               style={{ display: "none" }}
               multiple
+
               // className={classes.addButton}
             />
             {/* <Plus fill="#646F7C" /> */}
@@ -80,7 +106,7 @@ function Write() {
         </AddBtn>
         <IBox>
           <TName>TITLE</TName>
-          <Put type="text" />
+          <Put type="text" ref={titleRef} />
           <TName>PRICE</TName>
           <Put
             type="text"
@@ -88,9 +114,9 @@ function Write() {
             onChange={(e) => setNum(inputPriceFormat(e.target.value))}
           />
           <TName>Explanation</TName>
-          <Text />
+          <Text ref={contentRef} />
           <Btn>
-            <PlusBtn>올리기</PlusBtn>
+            <PlusBtn onClick={addPost}>올리기</PlusBtn>
           </Btn>
         </IBox>
       </Contents>
