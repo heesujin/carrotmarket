@@ -72,6 +72,7 @@ const SignUpBtn = styled.button`
   margin-top: 50px;
   border-radius: 10px;
   font-size: large;
+  font-family: Jalnan;
   &:hover {
     background-color: #c64d07;
     cursor: pointer;
