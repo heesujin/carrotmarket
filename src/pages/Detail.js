@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import logout from "../image/무제-1.png";
 import "../App.css";
+import Header from "./Header";
 
 function Detail() {
   return (
     <div>
-      <Logo>
-        <LogoImg src={carrot} alt="" />
-      </Logo>
-      <Line />
+      <Header />
       <Contents>
         <Profile>
           <Name>
@@ -61,6 +60,14 @@ const Logo = styled.div`
 const LogoImg = styled.img`
   width: 60px;
   margin-top: 50px;
+  margin-left: 20px;
+`;
+
+const LogoutImg = styled.img`
+  width: 35px;
+  margin-top: 30px;
+  float: right;
+  margin-right: 50px;
 `;
 
 const Line = styled.hr`

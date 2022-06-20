@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
+import Header from "./Header";
+import PlusAdd from "./PlusAdd";
 
 function Main() {
   return (
     <div>
-      <Logo>
-        <LogoImg src={carrot} alt="" />
-      </Logo>
-      <Line />
+      <Header />
       <AllCards>
         <Cards>
           <Card>
@@ -116,9 +115,7 @@ function Main() {
           </Card>
         </Cards>
       </AllCards>
-      <Plus>
-        <Add>+</Add>
-      </Plus>
+      <PlusAdd />
     </div>
   );
 }

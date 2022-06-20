@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
+import Header from "./Header";
 
 function Write() {
   const [showImages, setShowImages] = React.useState([]);
@@ -43,10 +44,7 @@ function Write() {
 
   return (
     <div>
-      <Logo>
-        <LogoImg src={carrot} alt="" />
-      </Logo>
-      <Line />
+      <Header />
       <Contents>
         <TBox>
           <Title>중고 물품 올리기</Title>
