@@ -9,6 +9,7 @@ function Write() {
   const titleRef = React.useRef(null);
   const imgRef = React.useRef(null);
 
+  const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
@@ -27,7 +28,8 @@ function Write() {
 
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
-    const imageLists = event;
+    const imageLists = event.target.files;
+    setPostImages(Array.from(imageLists));
     console.log(imageLists);
     let imageUrlLists = [...showImages];
     console.log(imageUrlLists);
@@ -50,20 +52,21 @@ function Write() {
   };
 
   const addPost = () => {
+    console.log(postImages);
     let data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
-      imageURL: imgRef,
+      imageURL: postImages,
     };
     console.log(data);
-    /* axios
+    axios
       .post("http://localhost:5001/write", data)
       .then((response) => {
         console.log(response, "포스트 추가");
-        window.location.replace("/main");
+        //window.location.replace("/main");
       })
-      .catch((error) => console.log(error, "포스트 추가 에러")); */
+      .catch((error) => console.log(error, "포스트 추가 에러"));
   };
 
   return (
@@ -88,7 +91,6 @@ function Write() {
         <AddBtn>
           <label
             htmlFor="input-file"
-            ref={imgRef}
             //   className={classes.addButton}
             onChange={handleAddImages}
           >
