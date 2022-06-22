@@ -4,11 +4,11 @@ import logout from "../image/무제-1.png";
 import "../App.css";
 import Header from "./Header";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 function Detail() {
-  const [isloaded, setIsloaded] = useState(false);
+  //const [isloaded, setIsloaded] = useState(false);
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
@@ -21,13 +21,13 @@ function Detail() {
     });
   }, []);
 
-  // const deletePost = () => {
-  //   axios
-  //     .delete(`http://localhost:5001/write/${id}`) // 삭제
-  //     .then((response) => {
-  //       setPostList((current) => current.filter((v) => v.id !== id));
-  //     });
-  // };
+  /* const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:5001/write/${id}`) // 삭제
+      .then((response) => {
+        setPostList((current) => current.filter((v) => v.id !== id));
+      });
+  }; */
 
   return (
     <>
@@ -35,7 +35,7 @@ function Detail() {
       <div>
         <Header />
         {postList.map((item, index) => {
-          console.log(item);
+          //console.log(item);
           return (
             <Contents key={index}>
               {item.postId === params.id ? (
@@ -48,7 +48,7 @@ function Detail() {
                       <Btns>
                         <Btn
                           onClick={() => {
-                            navigate(`/modify/${item.postId}`);
+                            navigate(`/modify/${item.id}`);
                           }}
                         >
                           수정
@@ -57,16 +57,13 @@ function Detail() {
                         <Btn
                           onClick={() => {
                             axios
-                              .delete(
-                                `http://13.124.188.218/post/${item.postId}`,
-                                {
-                                  headers: {
-                                    Authorization: `Bearer ${localStorage.getItem(
-                                      "token"
-                                    )}`,
-                                  },
-                                }
-                              ) // 삭제
+                              .delete(`http://13.124.188.218/post/${item.id}`, {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "token"
+                                  )}`,
+                                },
+                              }) // 삭제
                               .then((response) => {
                                 console.log(response);
                                 setPostList((current) =>
@@ -186,6 +183,7 @@ const Btn = styled.button`
   border-radius: 5px;
   color: white;
   font-family: "Jalnan";
+  cursor: pointer;
 `;
 
 const Plus = styled.div`

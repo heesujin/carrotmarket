@@ -2,7 +2,9 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import axios from "axios";
 
@@ -10,10 +12,11 @@ function Write() {
   const contentRef = React.useRef(null);
   const titleRef = React.useRef(null);
   const priceRef = React.useRef(null);
-  const imgRef = React.useRef(null);
 
+  const params = useParams();
   const navigate = useNavigate();
 
+  const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
@@ -33,7 +36,10 @@ function Write() {
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
+    setPostImages(Array.from(imageLists));
+    console.log(imageLists);
     let imageUrlLists = [...showImages];
+    console.log(imageUrlLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
@@ -52,19 +58,37 @@ function Write() {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
-  const modifyPost = (id) => {
+  const modifyPost = async () => {
+    //파이어 베이스 이미지 불러오기.
+    let fileurlList = [];
+    for (let i = 0; i < postImages.length; i++) {
+      let image = await uploadBytes(
+        ref(storage, `images/${postImages[i].name}`),
+        postImages[i]
+      );
+      const file_url = await getDownloadURL(image.ref);
+      console.log(file_url);
+      fileurlList.push(file_url);
+    }
+    console.log(fileurlList);
+
     const data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
       price: priceRef.current.value,
-      imageURL: [
-        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
-      ],
+      imageURL: fileurlList,
     };
     axios
-      .put(`http://13.124.188.218/post/${id}`, data)
-      .then((res) => console.log(res))
+      .patch(`http://13.124.188.218/post/${params.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        window.location.replace("/main");
+      })
       .catch((err) => console.log(err));
   };
 
