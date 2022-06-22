@@ -54,30 +54,30 @@ function Detail() {
                           수정
                         </Btn>
 
-                        <Link to={"/main"}>
-                          <Btn
-                            onClick={() => {
-                              axios
-                                .delete(
-                                  `http://13.124.188.218//post/:${item.postId}`,
-                                  {
-                                    headers: {
-                                      Authorization: `Bearer ${localStorage.getItem(
-                                        "token"
-                                      )}`,
-                                    },
-                                  }
-                                ) // 삭제
-                                .then((response) => {
-                                  setPostList((current) =>
-                                    current.filter((v) => v.id !== item.postId)
-                                  );
-                                });
-                            }}
-                          >
-                            삭제
-                          </Btn>
-                        </Link>
+                        <Btn
+                          onClick={() => {
+                            axios
+                              .delete(
+                                `http://13.124.188.218/post/${item.postId}`,
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${localStorage.getItem(
+                                      "token"
+                                    )}`,
+                                  },
+                                }
+                              ) // 삭제
+                              .then((response) => {
+                                console.log(response);
+                                setPostList((current) =>
+                                  current.filter((v) => v.id !== item.postId)
+                                );
+                                navigate("/main");
+                              });
+                          }}
+                        >
+                          삭제
+                        </Btn>
                       </Btns>
                     ) : null}
                   </Profile>
