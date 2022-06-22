@@ -64,7 +64,9 @@ function Write() {
         postImages[i]
       );
       console.log(image);
-      const file_url = await getDownloadURL(image);
+      const file_url = await getDownloadURL(image.ref);
+
+      console.log(file_url);
     }
   };
 
@@ -145,7 +147,7 @@ function Write() {
           <TName>Explanation</TName>
           <Text ref={contentRef} />
           <Btn>
-            <PlusBtn onClick={uploadFB}>올리기</PlusBtn>
+            <PlusBtn onClick={addPost}>올리기</PlusBtn>
           </Btn>
         </IBox>
       </Contents>
