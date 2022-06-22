@@ -42,7 +42,7 @@ function Login() {
         });
     } catch (err) {
       console.log(err);
-      window.alert(err.response.data.errorMessage);
+      window.alert(err.response.data);
     }
   };
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
+import axios from "axios";
 
 function Write() {
   const [showImages, setShowImages] = React.useState([]);
@@ -42,6 +43,11 @@ function Write() {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
+  const modifyPost = () => {
+    axios
+      .put("http://localhost:5001/post")
+      .then((res) => console.log(res.data));
+  };
   return (
     <div>
       <Header />
@@ -90,7 +96,7 @@ function Write() {
           <TName>Explanation</TName>
           <Text />
           <Btn>
-            <PlusBtn>수정하기</PlusBtn>
+            <PlusBtn onClick={modifyPost}>수정하기</PlusBtn>
           </Btn>
         </IBox>
       </Contents>

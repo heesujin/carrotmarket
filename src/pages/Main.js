@@ -10,7 +10,7 @@ function Main() {
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:5001/post").then((res) => {
+    axios.get("http://13.124.188.218/post").then((res) => {
       console.log(res.data, "데이터 불러오기");
       setPostList(res.data);
     });

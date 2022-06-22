@@ -3,9 +3,15 @@ import carrot from "../image/당근마켓.png";
 import logout from "../image/무제-1.png";
 
 function Header() {
+  const callLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    window.location.replace("/");
+  };
+
   return (
     <div>
-      <LogoutImg src={logout} alt="" />
+      <LogoutImg src={logout} alt="" onClick={callLogOut} />
       <Logo>
         <LogoImg src={carrot} alt="" />
       </Logo>

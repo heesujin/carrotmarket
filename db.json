@@ -4,6 +4,7 @@
       "userId": "aaa",
       "content": "test 0",
       "title": "test 0",
+      "price": 121212,
       "imageURL": [
         "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
         "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
@@ -18,6 +19,7 @@
       "userId": "aaa",
       "content": "test 1",
       "title": "test 1",
+      "price": 121212,
       "imageURL": [
         "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
         "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
@@ -32,6 +34,7 @@
       "userId": "aaa",
       "content": "test 2",
       "title": "test 2",
+      "price": 121212,
       "imageURL": [
         "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
         "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
@@ -46,6 +49,7 @@
       "userId": "aaa",
       "content": "test 3",
       "title": "test 3",
+      "price": 121212,
       "imageURL": [
         "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
         "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
@@ -60,6 +64,7 @@
       "userId": "aaa",
       "content": "test 4",
       "title": "test 4",
+      "price": 121212,
       "imageURL": [
         "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
         "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
@@ -74,37 +79,8 @@
       "userId": "aaa",
       "content": "",
       "title": "",
-      "imageURL": [
-        {},
-        {}
-      ],
+      "imageURL": [],
       "id": 5
-    },
-    {
-      "userId": "aaa",
-      "content": "",
-      "title": "",
-      "imageURL": [
-        {},
-        {},
-        {}
-      ],
-      "id": 6
-    },
-    {
-      "userId": "aaa",
-      "content": "asdasd",
-      "title": "asdasd",
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
     }
   ],
   "post": [

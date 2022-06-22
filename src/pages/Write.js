@@ -7,7 +7,6 @@ import axios from "axios";
 function Write() {
   const contentRef = React.useRef(null);
   const titleRef = React.useRef(null);
-  const imgRef = React.useRef(null);
 
   const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
@@ -29,7 +28,7 @@ function Write() {
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
-    setPostImages(Array.from(imageLists));
+    //setPostImages(Array.from(imageLists));
     console.log(imageLists);
     let imageUrlLists = [...showImages];
     console.log(imageUrlLists);
