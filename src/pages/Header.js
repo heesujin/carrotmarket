@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import logout from "../image/무제-1.png";
@@ -15,6 +16,7 @@ function Header() {
       <Logo>
         <LogoImg src={carrot} alt="" />
       </Logo>
+
       <Line />
     </div>
   );

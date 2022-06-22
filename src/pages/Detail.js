@@ -3,52 +3,119 @@ import carrot from "../image/당근마켓.png";
 import logout from "../image/무제-1.png";
 import "../App.css";
 import Header from "./Header";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import axios from "axios";
 
 function Detail() {
-  return (
-    <div>
-      <Header />
-      <Contents>
-        <Profile>
-          <Name>
-            작성자 &nbsp;<Time>00:00:00 00:00</Time>
-          </Name>
-          <Btns>
-            <Btn>수정</Btn>
-            <Btn>삭제</Btn>
-          </Btns>
-        </Profile>
-        <div>
-          <div>
-            <img src="" alt="" />
-          </div>
-        </div>
-        <Used>
-          <Imgs>
-            <Img
-              src="https://mblogthumb-phinf.pstatic.net/MjAxODA5MzBfMjUy/MDAxNTM4MzE2ODc1NTE3.qPUd81FrNy3GIBQJFbiQYivQQXsArTzmfObEnzA0Aakg.2Vl2zxvvHJHw-zcimdq9V7Mh-a9-4_ajpoKuz5o7rO4g.JPEG.siwon1115/0930_05.jpg?type=w800"
-              alt=""
-            />
-            <Price>₩ 100,000</Price>
-          </Imgs>
-          <UsedComments>
-            <ItemName>
-              <Title>title</Title>
-            </ItemName>
-            <ItemExplan>
-              <Explanation>판매내용을 적어주세요</Explanation>
-            </ItemExplan>
-            <Heart>
-              ❤<span style={{ fontSize: "22px" }}>0</span>
-            </Heart>
-          </UsedComments>
-        </Used>
-      </Contents>
+  const [isloaded, setIsloaded] = useState(false);
+  const [postList, setPostList] = useState([]);
+  const navigate = useNavigate();
+  const params = useParams();
+  console.log(params.id);
 
-      <Plus>
-        <Add>+</Add>
-      </Plus>
-    </div>
+  useEffect(() => {
+    axios.get("http://13.124.188.218/post").then((res) => {
+      console.log(res.data.contentList, "데이터 불러오기");
+      setPostList(res.data.contentList);
+    });
+  }, []);
+
+  // const deletePost = () => {
+  //   axios
+  //     .delete(`http://localhost:5001/write/${id}`) // 삭제
+  //     .then((response) => {
+  //       setPostList((current) => current.filter((v) => v.id !== id));
+  //     });
+  // };
+
+  return (
+    <>
+      {/* {isloaded && ( */}
+      <div>
+        <Header />
+        {postList.map((item, index) => {
+          console.log(item);
+          return (
+            <Contents key={index}>
+              {item.postId === params.id ? (
+                <>
+                  <Profile>
+                    <Name>
+                      {item.userId} &nbsp;<Time>{item.CreateAt}</Time>
+                    </Name>
+                    {item.userId === localStorage.getItem("id") ? (
+                      <Btns>
+                        <Btn
+                          onClick={() => {
+                            navigate(`/modify/${item.postId}`);
+                          }}
+                        >
+                          수정
+                        </Btn>
+
+                        <Link to={"/main"}>
+                          <Btn
+                            onClick={() => {
+                              axios
+                                .delete(
+                                  `http://13.124.188.218//post/:${item.postId}`,
+                                  {
+                                    headers: {
+                                      Authorization: `Bearer ${localStorage.getItem(
+                                        "token"
+                                      )}`,
+                                    },
+                                  }
+                                ) // 삭제
+                                .then((response) => {
+                                  setPostList((current) =>
+                                    current.filter((v) => v.id !== item.postId)
+                                  );
+                                });
+                            }}
+                          >
+                            삭제
+                          </Btn>
+                        </Link>
+                      </Btns>
+                    ) : null}
+                  </Profile>
+
+                  <div>
+                    <div>
+                      <img src="" alt="" />
+                    </div>
+                  </div>
+                  <Used>
+                    <Imgs>
+                      <Img src={item.imageURL[0]} alt="" />
+                      <Price>₩ {item.price}</Price>
+                    </Imgs>
+                    <UsedComments>
+                      <ItemName>
+                        <Title>{item.title}</Title>
+                      </ItemName>
+                      <ItemExplan>
+                        <Explanation>{item.content}</Explanation>
+                      </ItemExplan>
+                      <Heart>
+                        ❤<span style={{ fontSize: "22px" }}>0</span>
+                      </Heart>
+                    </UsedComments>
+                  </Used>
+                </>
+              ) : null}
+            </Contents>
+          );
+        })}
+
+        {/* <Plus>
+          <Add>+</Add>
+        </Plus> */}
+      </div>
+      {/* )} */}
+    </>
   );
 }
 

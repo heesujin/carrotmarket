@@ -1,6 +1,7 @@
 {
   "write": [
     {
+<<<<<<< HEAD
       "userId": "aaa",
       "content": "test 0",
       "title": "test 0",
@@ -96,6 +97,17 @@
         "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
       ],
       "title": "test 4"
+=======
+      "userId": "히수S2",
+      "content": "1232123",
+      "title": "ㅁㄴㅇㄹ",
+      "price": "123",
+      "imageURL": [
+        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2020/03/27/08/45/stone-lotus-4972881_960_720.jpg"
+      ],
+      "id": 1
+>>>>>>> 39650171336c834027dc8f072558ff201e62953a
     }
   ]
 }

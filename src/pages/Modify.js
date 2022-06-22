@@ -2,9 +2,13 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 function Write() {
+  const navigate = useNavigate();
+
   const [showImages, setShowImages] = React.useState([]);
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
@@ -44,10 +48,9 @@ function Write() {
   };
 
   const modifyPost = () => {
-    axios
-      .put("http://localhost:5001/post")
-      .then((res) => console.log(res.data));
+    axios.put(`http://13.124.188.218//post/:`);
   };
+
   return (
     <div>
       <Header />
