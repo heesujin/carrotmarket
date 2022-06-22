@@ -3,14 +3,17 @@ import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Write() {
   const contentRef = React.useRef(null);
   const titleRef = React.useRef(null);
   const imgRef = React.useRef(null);
+  const priceRef = React.useRef(null);
 
   const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
+
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
 
@@ -53,18 +56,27 @@ function Write() {
 
   const addPost = () => {
     console.log(postImages);
-    let data = {
+
+    const data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
-      imageURL: postImages,
+      price: priceRef.current.value,
+      imageURL: [
+        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
+      ],
     };
+
     console.log(data);
     axios
-      .post("http://localhost:5001/write", data)
+      .post(`http://13.124.188.218/post`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response, "포스트 추가");
-        //window.location.replace("/main");
+        window.location.replace("/main");
       })
       .catch((error) => console.log(error, "포스트 추가 에러"));
   };
@@ -111,8 +123,9 @@ function Write() {
           <Put type="text" ref={titleRef} />
           <TName>PRICE</TName>
           <Put
+            ref={priceRef}
             type="text"
-            value={num}
+            value={num || " "}
             onChange={(e) => setNum(inputPriceFormat(e.target.value))}
           />
           <TName>Explanation</TName>

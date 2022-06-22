@@ -1,125 +1,15 @@
 {
   "write": [
     {
-      "userId": "aaa",
-      "content": "test 0",
-      "title": "test 0",
+      "userId": "히수S2",
+      "content": "1232123",
+      "title": "ㅁㄴㅇㄹ",
+      "price": "123",
       "imageURL": [
-        "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "blob:http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "blob:http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "blob:http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
-      ],
-      "id": 0
-    },
-    {
-      "userId": "aaa",
-      "content": "test 1",
-      "title": "test 1",
-      "imageURL": [
-        "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "blob:http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "blob:http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "blob:http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
+        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2020/03/27/08/45/stone-lotus-4972881_960_720.jpg"
       ],
       "id": 1
-    },
-    {
-      "userId": "aaa",
-      "content": "test 2",
-      "title": "test 2",
-      "imageURL": [
-        "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "blob:http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "blob:http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "blob:http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
-      ],
-      "id": 2
-    },
-    {
-      "userId": "aaa",
-      "content": "test 3",
-      "title": "test 3",
-      "imageURL": [
-        "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "blob:http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "blob:http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "blob:http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
-      ],
-      "id": 3
-    },
-    {
-      "userId": "aaa",
-      "content": "test 4",
-      "title": "test 4",
-      "imageURL": [
-        "blob:http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "blob:http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "blob:http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "blob:http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "blob:http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
-      ],
-      "id": 4
-    },
-    {
-      "userId": "aaa",
-      "content": "",
-      "title": "",
-      "imageURL": [
-        {},
-        {}
-      ],
-      "id": 5
-    },
-    {
-      "userId": "aaa",
-      "content": "",
-      "title": "",
-      "imageURL": [
-        {},
-        {},
-        {}
-      ],
-      "id": 6
-    },
-    {
-      "userId": "aaa",
-      "content": "asdasd",
-      "title": "asdasd",
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
-    }
-  ],
-  "post": [
-    {
-      "id": 0,
-      "userId": "aaa",
-      "imageURL": [
-        "http://localhost:3000/b66ac5aa-1bff-4b3f-b03f-116a419801ae",
-        "http://localhost:3000/73c0724d-2ed2-42bd-ae97-1ad1b6158a26",
-        "http://localhost:3000/2ba2ff02-505d-4cc9-be4b-ff01522c58a6",
-        "http://localhost:3000/210b8d9c-d564-4f93-a390-da2b4e90a1f1",
-        "http://localhost:3000/40b587be-2486-46a7-bbe3-73f1ce43d745",
-        "blob:http://localhost:3000/0e3c544d-c228-47e3-926e-a07cbee9953c"
-      ],
-      "title": "test 4"
     }
   ]
 }

@@ -1,14 +1,22 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import logout from "../image/무제-1.png";
 
 function Header() {
+  const callLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    window.location.replace("/");
+  };
   return (
     <div>
-      <LogoutImg src={logout} alt="" />
-      <Logo>
-        <LogoImg src={carrot} alt="" />
-      </Logo>
+      <LogoutImg src={logout} alt="" onClick={callLogOut} />
+      <Link to={"/main"}>
+        <Logo>
+          <LogoImg src={carrot} alt="" />
+        </Logo>
+      </Link>
       <Line />
     </div>
   );

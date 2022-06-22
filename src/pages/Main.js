@@ -10,9 +10,9 @@ function Main() {
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:5001/post").then((res) => {
-      console.log(res.data, "데이터 불러오기");
-      setPostList(res.data);
+    axios.get("http://13.124.188.218/post").then((res) => {
+      console.log(res.data.contentList, "데이터 불러오기");
+      setPostList(res.data.contentList);
     });
   }, []);
   return (
@@ -25,7 +25,8 @@ function Main() {
               <Card
                 key={index}
                 onClick={() => {
-                  navigate(`/post/${post.id}`);
+                  navigate(`/post/${post._id}`);
+                  // console.log(post.postId, "이거 뭐지?");
                 }}
               >
                 <CardImg>
@@ -35,20 +36,21 @@ function Main() {
                   />
                 </CardImg>
                 <Content>
+                  <Title>{post.title}</Title>
                   <Th>
-                    <Title>{post.title}</Title>
                     <Heart>
                       ❤<span style={{ fontSize: "22px" }}>0</span>
                     </Heart>
                   </Th>
 
-                  <Price>₩ 100,000</Price>
+                  <Price>₩ {post.price}</Price>
                   {/* 🤍 */}
                 </Content>
               </Card>
             );
           })}
-          <Card>
+        </Cards>
+        {/* <Card>
             <CardImg>
               <Img
                 src="https://contents.lotteon.com/itemimage/_v165153/LO/16/53/47/92/32/_1/65/34/79/23/3/LO1653479232_1653479233_1.jpg/dims/optimize/dims/resizemc/400x400"
@@ -65,7 +67,7 @@ function Main() {
 
               <Price>₩ 100,000</Price>
               {/* 🤍 */}
-            </Content>
+        {/* </Content>
           </Card>
           <Card>
             <CardImg>
@@ -151,10 +153,11 @@ function Main() {
               </Th>
               <Price>₩ 100,000</Price>
             </Content>
-          </Card>
-        </Cards>
+          </Card>  */}
       </AllCards>
-      <PlusAdd />
+      <Link to={"/write"}>
+        <PlusAdd />
+      </Link>
     </div>
   );
 }
@@ -250,24 +253,30 @@ const Content = styled.div`
   margin-left: 30px;
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   color: white;
+  overflow: hidden; // 을 사용해 영역을 감출 것
+  text-overflow: ellipsis; // 로 ... 을 만들기
+  white-space: nowrap; // 아래줄로 내려가는 것을 막기위해
+  word-break: break-all;
+  width: 150px;
 `;
 
 const Price = styled.h3`
   color: white;
+  margin-top: 40px;
 `;
 
 const Heart = styled.p`
   color: white;
-  margin-left: 130px;
-  margin-top: 14px;
-  font-size: 30px;
+  margin-left: 180px;
+  margin-top: 0px;
+  font-size: 20px;
 `;
 
 const Th = styled.div`
   display: flex;
-  margin-top: -20px;
+  margin-top: -40px;
   margin-bottom: -27px;
 `;
 
