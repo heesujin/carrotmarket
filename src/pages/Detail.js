@@ -38,35 +38,48 @@ function Detail() {
           console.log(item);
           return (
             <Contents key={index}>
-              {item._id === params.id ? (
+              {item.postId === params.id ? (
                 <>
                   <Profile>
                     <Name>
-                      {item.userId} &nbsp;<Time>{item.createdAt}</Time>
+                      {item.userId} &nbsp;<Time>{item.CreateAt}</Time>
                     </Name>
-                    {/* {item.userId == localStorage.getItem("id") ? ( */}
-                    <Btns>
-                      <Link to={`/modify/${item._id}`}>
-                        <Btn>수정</Btn>
-                      </Link>
-                      <Link to={"/main"}>
+                    {item.userId === localStorage.getItem("id") ? (
+                      <Btns>
                         <Btn
                           onClick={() => {
-                            axios
-                              .delete(
-                                `http://13.124.188.218//post/:${item._id}`
-                              ) // 삭제
-                              .then((response) => {
-                                setPostList((current) =>
-                                  current.filter((v) => v.id !== item._id)
-                                );
-                              });
+                            navigate(`/modify/${item.postId}`);
                           }}
                         >
-                          삭제
+                          수정
                         </Btn>
-                      </Link>
-                    </Btns>
+
+                        <Link to={"/main"}>
+                          <Btn
+                            onClick={() => {
+                              axios
+                                .delete(
+                                  `http://13.124.188.218//post/:${item.postId}`,
+                                  {
+                                    headers: {
+                                      Authorization: `Bearer ${localStorage.getItem(
+                                        "token"
+                                      )}`,
+                                    },
+                                  }
+                                ) // 삭제
+                                .then((response) => {
+                                  setPostList((current) =>
+                                    current.filter((v) => v.id !== item.postId)
+                                  );
+                                });
+                            }}
+                          >
+                            삭제
+                          </Btn>
+                        </Link>
+                      </Btns>
+                    ) : null}
                   </Profile>
 
                   <div>

@@ -25,7 +25,7 @@ function Main() {
               <Card
                 key={index}
                 onClick={() => {
-                  navigate(`/post/${post._id}`);
+                  navigate(`/post/${post.postId}`);
                   // console.log(post.postId, "이거 뭐지?");
                 }}
               >

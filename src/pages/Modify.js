@@ -2,8 +2,12 @@ import styled from "styled-components";
 import carrot from "../image/당근마켓.png";
 import React from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Write() {
+  const navigate = useNavigate();
+
   const [showImages, setShowImages] = React.useState([]);
   //input 숫자 천단위 콤마
   const [num, setNum] = React.useState();
@@ -40,6 +44,10 @@ function Write() {
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
+  };
+
+  const modifyPost = () => {
+    axios.put(`http://13.124.188.218//post/:`);
   };
 
   return (
@@ -90,7 +98,13 @@ function Write() {
           <TName>Explanation</TName>
           <Text />
           <Btn>
-            <PlusBtn>수정하기</PlusBtn>
+            <PlusBtn
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              수정하기
+            </PlusBtn>
           </Btn>
         </IBox>
       </Contents>

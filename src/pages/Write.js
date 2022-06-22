@@ -4,6 +4,8 @@ import React from "react";
 import Header from "./Header";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Write() {
   const contentRef = React.useRef(null);
@@ -52,6 +54,18 @@ function Write() {
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
+  };
+
+  const uploadFB = async () => {
+    console.log(postImages);
+    for (let i = 0; i < postImages.length; i++) {
+      let image = await uploadBytes(
+        ref(storage, `images/${postImages[i].name}`),
+        postImages[i]
+      );
+      console.log(image);
+      const file_url = await getDownloadURL(image);
+    }
   };
 
   const addPost = () => {
@@ -131,7 +145,7 @@ function Write() {
           <TName>Explanation</TName>
           <Text ref={contentRef} />
           <Btn>
-            <PlusBtn onClick={addPost}>올리기</PlusBtn>
+            <PlusBtn onClick={uploadFB}>올리기</PlusBtn>
           </Btn>
         </IBox>
       </Contents>
