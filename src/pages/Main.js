@@ -11,16 +11,17 @@ function Main() {
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("http://13.124.188.218/post").then((res) => {
-      console.log(res.data.contentList, "데이터 불러오기");
-      setPostList(res.data.contentList);
+      console.log(res.data, "데이터 불러오기");
+      setPostList(res.data);
     });
   }, []);
+
   return (
     <div>
       <Header />
       <AllCards>
         <Cards>
-          {postList.map((post, index) => {
+          {postList?.map((post, index) => {
             return (
               <Card
                 key={index}

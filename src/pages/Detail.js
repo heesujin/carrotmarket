@@ -16,8 +16,8 @@ function Detail() {
 
   useEffect(() => {
     axios.get("http://13.124.188.218/post").then((res) => {
-      console.log(res.data.contentList, "데이터 불러오기");
-      setPostList(res.data.contentList);
+      console.log(res.data, "데이터 불러오기");
+      setPostList(res.data);
     });
   }, []);
 
