@@ -7,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Write() {
+  const contentRef = React.useRef(null);
+  const titleRef = React.useRef(null);
+  const priceRef = React.useRef(null);
+  const imgRef = React.useRef(null);
+
   const navigate = useNavigate();
 
   const [showImages, setShowImages] = React.useState([]);
@@ -47,8 +52,20 @@ function Write() {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
-  const modifyPost = () => {
-    axios.put(`http://13.124.188.218//post/:`);
+  const modifyPost = (id) => {
+    const data = {
+      userId: localStorage.getItem("id"),
+      content: contentRef.current.value,
+      title: titleRef.current.value,
+      price: priceRef.current.value,
+      imageURL: [
+        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
+      ],
+    };
+    axios
+      .put(`http://13.124.188.218/post/${id}`, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -89,15 +106,16 @@ function Write() {
         </AddBtn>
         <IBox>
           <TName>TITLE</TName>
-          <Put type="text" />
+          <Put type="text" ref={titleRef} />
           <TName>PRICE</TName>
           <Put
+            ref={priceRef}
             type="text"
-            value={num}
+            value={num || " "}
             onChange={(e) => setNum(inputPriceFormat(e.target.value))}
           />
           <TName>Explanation</TName>
-          <Text />
+          <Text ref={contentRef} />
           <Btn>
             <PlusBtn onClick={modifyPost}>수정하기</PlusBtn>
           </Btn>

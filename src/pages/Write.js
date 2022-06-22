@@ -10,11 +10,9 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 function Write() {
   const contentRef = React.useRef(null);
   const titleRef = React.useRef(null);
-<<<<<<< HEAD
-=======
+
   const imgRef = React.useRef(null);
   const priceRef = React.useRef(null);
->>>>>>> 39650171336c834027dc8f072558ff201e62953a
 
   const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);

@@ -11,13 +11,8 @@ function Main() {
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("http://13.124.188.218/post").then((res) => {
-<<<<<<< HEAD
       console.log(res.data, "데이터 불러오기");
       setPostList(res.data);
-=======
-      console.log(res.data.contentList, "데이터 불러오기");
-      setPostList(res.data.contentList);
->>>>>>> 39650171336c834027dc8f072558ff201e62953a
     });
   }, []);
   return (
