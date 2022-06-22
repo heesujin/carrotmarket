@@ -15,12 +15,13 @@ function Main() {
       setPostList(res.data);
     });
   }, []);
+
   return (
     <div>
       <Header />
       <AllCards>
         <Cards>
-          {postList.map((post, index) => {
+          {postList?.map((post, index) => {
             return (
               <Card
                 key={index}

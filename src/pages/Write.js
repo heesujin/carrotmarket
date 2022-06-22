@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { async } from "@firebase/util";
 
 function Write() {
   const contentRef = React.useRef(null);
@@ -14,6 +15,7 @@ function Write() {
   const imgRef = React.useRef(null);
   const priceRef = React.useRef(null);
 
+  const [fileUrl, setFileUrl] = React.useState([]);
   const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
 
@@ -57,7 +59,9 @@ function Write() {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
-  const uploadFB = async () => {
+  const uploadFB = async () => {};
+
+  const addPost = async () => {
     console.log(postImages);
     for (let i = 0; i < postImages.length; i++) {
       let image = await uploadBytes(
@@ -66,22 +70,16 @@ function Write() {
       );
       console.log(image);
       const file_url = await getDownloadURL(image.ref);
-
+      setFileUrl(getDownloadURL(image.ref));
       console.log(file_url);
     }
-  };
 
-  const addPost = () => {
-    console.log(postImages);
-
-    const data = {
+    let data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
       price: priceRef.current.value,
-      imageURL: [
-        "https://cdn.pixabay.com/photo/2021/10/19/11/35/yoga-6723315_960_720.jpg",
-      ],
+      imageURL: fileUrl,
     };
 
     console.log(data);
@@ -93,7 +91,7 @@ function Write() {
       })
       .then((response) => {
         console.log(response, "포스트 추가");
-        window.location.replace("/main");
+        // window.location.replace("/main");
       })
       .catch((error) => console.log(error, "포스트 추가 에러"));
   };
