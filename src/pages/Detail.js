@@ -184,7 +184,7 @@ const Line = styled.hr`
 const Contents = styled.div`
   border: 1px solid white;
   position: absolute;
-  margin-top: 550px;
+  margin-top: 360px;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
