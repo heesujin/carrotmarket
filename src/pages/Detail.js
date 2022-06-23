@@ -110,10 +110,18 @@ function Detail() {
                     </div>
                   </div>
                   <Used>
-                    <Imgs>
-                      <Img src={item.imageURL[0]} alt="" />
-                      <Price>₩ {item.price}</Price>
-                    </Imgs>
+                    <LeftIn>
+                      <Imgs>
+                        {item.imageURL.map((v, i) => (
+                          <Img key={i} src={v} alt="" />
+                        ))}
+                      </Imgs>
+
+                      <div>
+                        <Price>₩ {item.price}</Price>
+                      </div>
+                    </LeftIn>
+
                     <UsedComments>
                       <ItemName>
                         <Title>{item.title}</Title>
@@ -179,14 +187,16 @@ const Contents = styled.div`
   margin-top: 550px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 700px;
   border-radius: 15px;
 `;
 
 const Profile = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const LeftIn = styled.div`
+  display: block;
 `;
 
 const Name = styled.h2`
@@ -238,13 +248,28 @@ const Used = styled.div`
 `;
 
 const Imgs = styled.div`
-  width: 500px;
+  width: 510px;
   height: 500px;
   margin-left: 50px;
   margin-top: 10px;
   border: 2px white solid;
   border-radius: 10px;
   display: block;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 `;
 
 const Img = styled.img`
@@ -302,6 +327,13 @@ const Explanation = styled.p`
 
 const Heart = styled.p`
   color: white;
+  margin-left: 570px;
+  margin-top: 50px;
+  font-size: 30px;
+`;
+
+const LikeHeart = styled.p`
+  color: red;
   margin-left: 570px;
   margin-top: 50px;
   font-size: 30px;
