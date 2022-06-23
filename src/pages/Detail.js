@@ -7,19 +7,45 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 function Detail() {
+  const params = useParams();
   //const [isloaded, setIsloaded] = useState(false);
+  const postId = params.postId;
+  const [userId, setUserId] = useState();
+  const [likeStatus, setLikeStatus] = useState();
+  const [likeCount, setLikeCount] = useState();
+
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
-  const params = useParams();
-  console.log(params.id);
 
   useEffect(() => {
     axios.get("http://13.124.188.218/post").then((res) => {
-      console.log(res.data, "데이터 불러오기");
+      //console.log(res.data, "데이터 불러오기");
       setPostList(res.data);
+      setUserId(localStorage.getItem("id"));
+      console.log(setLikeCount(res));
+      setLikeCount(res.data.length);
     });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://13.124.188.218/like/${postId}`)
+      .then((res) =>
+        res.userId === userId ? setLikeStatus(true) : setLikeStatus(false)
+      );
+  }, []);
+
+  const likeClick = (e) => {
+    if (userId && !likeStatus) {
+      axios.post(`http://13.124.188.218/like/${postId}`, userId);
+    } else {
+      axios.delete(`http://13.124.188.218/like/${postId}`, userId);
+    }
+  };
 
   /* const deletePost = (id) => {
     axios
@@ -31,7 +57,6 @@ function Detail() {
 
   return (
     <>
-      {/* {isloaded && ( */}
       <div>
         <Header />
         {postList.map((item, index) => {
@@ -97,7 +122,12 @@ function Detail() {
                         <Explanation>{item.content}</Explanation>
                       </ItemExplan>
                       <Heart>
-                        ❤<span style={{ fontSize: "22px" }}>0</span>
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          style={{ fontSize: "22px" }}
+                          onClick={likeClick}
+                        />
+                        <span>{likeCount}</span>
                       </Heart>
                     </UsedComments>
                   </Used>
