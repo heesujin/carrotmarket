@@ -27,7 +27,7 @@ function Main() {
                 key={index}
                 onClick={() => {
                   navigate(`/post/${post.postId}`);
-                  // console.log(post.postId, "이거 뭐지?");
+                  // console.log(post, "이거 뭐지?");
                 }}
               >
                 <CardImg>
@@ -37,8 +37,9 @@ function Main() {
                   />
                 </CardImg>
                 <Content>
-                  <Title>{post.title}</Title>
                   <Th>
+                    <Title>{post.title}</Title>
+
                     <Heart>
                       ❤<span style={{ fontSize: "22px" }}>0</span>
                     </Heart>
@@ -225,6 +226,7 @@ const CardImg = styled.div`
   width: 240px;
   height: 260px;
   margin: 20px auto;
+  margin-bottom: 20px;
 `;
 
 const Card = styled.div`
@@ -270,14 +272,14 @@ const Price = styled.h3`
 
 const Heart = styled.p`
   color: white;
-  margin-left: 180px;
-  margin-top: 0px;
+  margin-left: 15px;
+  margin-top: 13px;
   font-size: 20px;
 `;
 
 const Th = styled.div`
   display: flex;
-  margin-top: -40px;
+  margin-top: -20px;
   margin-bottom: -27px;
 `;
 

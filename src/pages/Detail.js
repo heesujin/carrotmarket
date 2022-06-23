@@ -4,12 +4,16 @@ import logout from "../image/무제-1.png";
 import "../App.css";
 import Header from "./Header";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Like from "../Post";
+import { SwiperImage } from "components";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Detail() {
-  const [isloaded, setIsloaded] = useState(false);
+  //const [isloaded, setIsloaded] = useState(false);
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
@@ -39,7 +43,7 @@ function Detail() {
       <div>
         <Header />
         {postList.map((item, index) => {
-          console.log(item);
+          //console.log(item);
           return (
             <Contents key={index}>
               {item.postId === params.id ? (
@@ -52,7 +56,7 @@ function Detail() {
                       <Btns>
                         <Btn
                           onClick={() => {
-                            navigate(`/modify/${item.postId}`);
+                            navigate(`/modify/${item.id}`);
                           }}
                         >
                           수정
@@ -61,16 +65,13 @@ function Detail() {
                         <Btn
                           onClick={() => {
                             axios
-                              .delete(
-                                `http://13.124.188.218/post/${item.postId}`,
-                                {
-                                  headers: {
-                                    Authorization: `Bearer ${localStorage.getItem(
-                                      "token"
-                                    )}`,
-                                  },
-                                }
-                              ) // 삭제
+                              .delete(`http://13.124.188.218/post/${item.id}`, {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "token"
+                                  )}`,
+                                },
+                              }) // 삭제
                               .then((response) => {
                                 console.log(response);
                                 setPostList((current) =>
@@ -92,10 +93,18 @@ function Detail() {
                     </div>
                   </div>
                   <Used>
-                    <Imgs>
-                      <Img src={item.imageURL[0]} alt="" />
-                      <Price>₩ {item.price}</Price>
-                    </Imgs>
+                    <LeftIn>
+                      <Imgs>
+                        {item.imageURL.map((v, i) => (
+                          <Img key={i} src={v} alt="" />
+                        ))}
+                      </Imgs>
+
+                      <div>
+                        <Price>₩ {item.price}</Price>
+                      </div>
+                    </LeftIn>
+
                     <UsedComments>
                       <ItemName>
                         <Title>{item.title}</Title>
@@ -132,8 +141,6 @@ const Contents = styled.div`
   margin-top: 550px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 700px;
   border-radius: 15px;
 `;
 
@@ -166,6 +173,7 @@ const Btn = styled.button`
   border-radius: 5px;
   color: white;
   font-family: "Jalnan";
+  cursor: pointer;
 `;
 
 const Plus = styled.div`
@@ -189,14 +197,33 @@ const Used = styled.div`
   display: flex;
 `;
 
+const LeftIn = styled.div`
+  display: block;
+`;
+
 const Imgs = styled.div`
-  width: 500px;
+  width: 510px;
   height: 500px;
   margin-left: 50px;
   margin-top: 10px;
   border: 2px white solid;
   border-radius: 10px;
   display: block;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 `;
 
 const Img = styled.img`

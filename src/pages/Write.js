@@ -11,10 +11,8 @@ import { async } from "@firebase/util";
 function Write() {
   const contentRef = React.useRef(null);
   const titleRef = React.useRef(null);
-  const imgRef = React.useRef(null);
   const priceRef = React.useRef(null);
 
-  const [fileUrl, setFileUrl] = React.useState([]);
   const [postImages, setPostImages] = React.useState([]);
   const [showImages, setShowImages] = React.useState([]);
 
@@ -58,34 +56,34 @@ function Write() {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
-  const uploadFB = async () => {};
+  //const uploadFB = async () => {};
 
   const addPost = async () => {
-    console.log(postImages);
-    let fileList = [];
+    //console.log(postImages);
+    let fileurlList = [];
     for (let i = 0; i < postImages.length; i++) {
       let image = await uploadBytes(
         ref(storage, `images/${postImages[i].name}`),
         postImages[i]
       );
-      console.log(image);
+      //console.log(image);
       const file_url = await getDownloadURL(image.ref);
-      setFileUrl(file_url);
-      console.log(file_url);
-      fileList.push(file_url);
-    }
 
-    console.log(fileList);
+      console.log(file_url);
+      fileurlList.push(file_url);
+    }
+    console.log(fileurlList);
 
     let data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
       price: priceRef.current.value,
-      imageURL: fileList,
+
+      imageURL: fileurlList,
     };
 
-    console.log(data);
+    console.log(data.imageURL);
     axios
       .post(`http://13.124.188.218/post`, data, {
         headers: {
@@ -104,7 +102,7 @@ function Write() {
       <Header />
       <Contents>
         <TBox>
-          <Title>중고 물품 올리기</Title>
+          <Title>중고 등록하기</Title>
         </TBox>
 
         <AddImg>

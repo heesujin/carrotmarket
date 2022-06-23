@@ -9,14 +9,17 @@ function Header() {
     localStorage.removeItem("id");
     window.location.replace("/");
   };
+
   return (
     <div>
-      <LogoutImg src={logout} alt="" onClick={callLogOut} />
       <Link to={"/main"}>
-        <Logo>
-          <LogoImg src={carrot} alt="" />
-        </Logo>
+        <LogoutImg src={logout} alt="" onClick={callLogOut} />
       </Link>
+
+      <Logo>
+        <LogoImg src={carrot} alt="" />
+      </Logo>
+
       <Line />
     </div>
   );
