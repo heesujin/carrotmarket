@@ -62,6 +62,7 @@ function Write() {
 
   const addPost = async () => {
     console.log(postImages);
+    let fileList = [];
     for (let i = 0; i < postImages.length; i++) {
       let image = await uploadBytes(
         ref(storage, `images/${postImages[i].name}`),
@@ -69,16 +70,19 @@ function Write() {
       );
       console.log(image);
       const file_url = await getDownloadURL(image.ref);
-      setFileUrl(getDownloadURL(image.ref));
+      setFileUrl(file_url);
       console.log(file_url);
+      fileList.push(file_url);
     }
+
+    console.log(fileList);
 
     let data = {
       userId: localStorage.getItem("id"),
       content: contentRef.current.value,
       title: titleRef.current.value,
       price: priceRef.current.value,
-      imageURL: fileUrl,
+      imageURL: fileList,
     };
 
     console.log(data);
@@ -90,7 +94,7 @@ function Write() {
       })
       .then((response) => {
         console.log(response, "포스트 추가");
-        // window.location.replace("/main");
+        window.location.replace("/main");
       })
       .catch((error) => console.log(error, "포스트 추가 에러"));
   };

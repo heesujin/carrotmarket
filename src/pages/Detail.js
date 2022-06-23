@@ -6,13 +6,25 @@ import Header from "./Header";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
+import Like from "../Post";
 
 function Detail() {
   const [isloaded, setIsloaded] = useState(false);
   const [postList, setPostList] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params.id);
+
+  // const [like, setLike] = useState();
+  // useEffect(() => {
+  //   async function likeLoad() {
+  //     await axios.get(`http://13.124.188.218/like/:postId`).then((response) => {
+  //       console.log(response);
+  //       setLike(response.data);
+  //     });
+  //     setIsloaded(true);
+  //   }
+  //   likeLoad();
+  // }, []);
 
   useEffect(() => {
     axios.get("http://13.124.188.218/post").then((res) => {
@@ -20,14 +32,6 @@ function Detail() {
       setPostList(res.data);
     });
   }, []);
-
-  // const deletePost = () => {
-  //   axios
-  //     .delete(`http://localhost:5001/write/${id}`) // 삭제
-  //     .then((response) => {
-  //       setPostList((current) => current.filter((v) => v.id !== id));
-  //     });
-  // };
 
   return (
     <>
@@ -99,6 +103,9 @@ function Detail() {
                       <ItemExplan>
                         <Explanation>{item.content}</Explanation>
                       </ItemExplan>
+                      {/* {like.map((value, i) => {
+                        return <Like postID={value.postID} />;
+                      })} */}
                       <Heart>
                         ❤<span style={{ fontSize: "22px" }}>0</span>
                       </Heart>
@@ -118,33 +125,6 @@ function Detail() {
     </>
   );
 }
-
-const Logo = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const LogoImg = styled.img`
-  width: 60px;
-  margin-top: 50px;
-  margin-left: 20px;
-`;
-
-const LogoutImg = styled.img`
-  width: 35px;
-  margin-top: 30px;
-  float: right;
-  margin-right: 50px;
-`;
-
-const Line = styled.hr`
-  background-color: #ee8548;
-  height: 1px;
-  margin-left: 50px;
-  margin-right: 50px;
-  border: none;
-  margin-top: 70px;
-`;
 
 const Contents = styled.div`
   border: 1px solid white;
@@ -274,6 +254,13 @@ const Explanation = styled.p`
 
 const Heart = styled.p`
   color: white;
+  margin-left: 570px;
+  margin-top: 50px;
+  font-size: 30px;
+`;
+
+const LikeHeart = styled.p`
+  color: red;
   margin-left: 570px;
   margin-top: 50px;
   font-size: 30px;
